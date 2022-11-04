@@ -26,3 +26,7 @@ Canvas has API for text: `fillText(string, x, y)`.
 y is the **baseline**, not the top.
 
 Canvas has API for gradients
+
+## Chapter 2. Hands On: Making Charts
+
+canvas element is a block level DOM element.
