@@ -17,3 +17,12 @@ To draw any other shape you must draw it yourself using a path.
 The origin coordinate system is like below:
 
 ![coordinate system](./pics/coords.png)
+
+we can use transform to get different coordinate system (origin and axis).
+
+Canvas has API for images: `drawImage()`
+
+Canvas has API for text: `fillText(string, x, y)`.
+y is the **baseline**, not the top.
+
+Canvas has API for gradients
