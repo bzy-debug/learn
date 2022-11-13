@@ -1,0 +1,28 @@
+/* * {
+  border: 2px solid black;
+} */
+
+#container {
+  border: 5px solid tomato;
+  margin: auto;
+  max-width: 30em;
+}
+
+.changeButtons {
+  display: flex;
+  justify-content: space-around;
+}
+
+.controlButtons {
+  display: flex;
+  justify-content: space-around;
+}
+
+#timer {
+  text-align: center;
+  font-size: xx-large;
+}
+
+#start {
+  text-align: center;
+}
