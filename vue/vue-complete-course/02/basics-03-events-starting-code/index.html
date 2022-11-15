@@ -19,10 +19,14 @@
     <section id="events">
       <h2>Events in Action</h2>
       <button @click="add(10)">Add 10</button>
-      <button @click="remove(10)">Reduce 10</button>
+      <button @click.prevent.right="remove(10)">Reduce 10</button>
       <p>Result: {{ counter }}</p>
-      <input type="text" @input="setName($event)">
-      <p>Your Name: {{ inputName }}</p>
+      <input type="text" @input="setName($event)" @keyup.enter="confirmed" />
+      <p>Your Name: {{ confirmName }}</p>
+      <form>
+        <input type="text" />
+        <button @click.prevent="submit">Submit</button>
+      </form>
     </section>
   </body>
 </html>
