@@ -9,6 +9,7 @@ const app = Vue.createApp({
   methods: {
     confirmed() {
       this.confirmName = this.inputName
+      this.inputName = ''
     },
     submit() {
       alert('Submitted!')

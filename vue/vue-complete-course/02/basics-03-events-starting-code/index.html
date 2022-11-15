@@ -22,7 +22,7 @@
       <button @click.prevent.right="remove(10)">Reduce 10</button>
       <p v-once>Initial Counter: {{ counter }}</p>
       <p>Result: {{ counter }}</p>
-      <input type="text" @input="setName($event)" @keyup.enter="confirmed" />
+      <input type="text" v-model="inputName" @keyup.enter="confirmed" />
       <p>Your Name: {{ confirmName }}</p>
       <form>
         <input type="text" />
