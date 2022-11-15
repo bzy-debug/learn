@@ -7,8 +7,13 @@ const app = Vue.createApp({
     }
   },
   computed: {
-    visibleClass() {
-      return this.isVisible ? 'visible' : 'hidden'
+    pClass() {
+      return {
+        user1: this.inputClass === 'user1',
+        user2: this.inputClass === 'user2',
+        visible: this.isVisible,
+        hidden: !this.isVisible,
+      }
     }
   },
   methods: {
