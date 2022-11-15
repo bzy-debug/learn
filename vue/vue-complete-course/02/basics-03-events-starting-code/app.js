@@ -2,17 +2,23 @@ const app = Vue.createApp({
   data() {
     return {
       counter: 0,
-      inputName: '',
+      name: '',
       confirmName: '',
+      lastName: '',
     };
+  },
+  watch: {
+    counter(value) {
+      if(value > 50)
+        this.counter = 0
+    }
   },
   computed: {
     fullName() {
-      console.log('again')
-      if(this.confirmName === '') {
+      if(this.name === '' || this.lastName === '') {
         return ''
       }
-      return 'happy ' + this.confirmName
+      return this.name + ' ' + this.lastName
     },
   },
   methods: {
@@ -20,11 +26,9 @@ const app = Vue.createApp({
       this.confirmName = this.inputName
       this.inputName = ''
     },
+
     submit() {
       alert('Submitted!')
-    },
-    setName(e) {
-      this.inputName = e.target.value
     },
 
     add(num) {
