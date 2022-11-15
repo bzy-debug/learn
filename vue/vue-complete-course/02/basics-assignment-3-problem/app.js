@@ -5,7 +5,7 @@ const app = Vue.createApp({
     }
   },
   watch: {
-    counter() {
+    result() {
       const that = this
       setTimeout(() => {
         that.counter = 0
