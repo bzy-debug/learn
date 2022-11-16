@@ -18,16 +18,33 @@
     </header>
     <section id="user-goals">
       <h2>My course goals</h2>
-      <input type="text" v-model="inputGoal"/>
+      <input type="text" v-model="inputGoal" @keyup.enter="addGoal" />
       <button @click="addGoal">Add Goal</button>
       <!-- <p v-show="goals.length === 0">No goals have been added yet - please start adding some!</p>
       <ul v-show="goals.length > 0">
         <li>Goal</li>
       </ul> -->
-      <p v-if="goals.length === 0">No goals have been added yet - please start adding some!</p>
+      <p v-if="goals.length === 0">
+        No goals have been added yet - please start adding some!
+      </p>
       <ul v-else>
-        <li>Goal</li>
+        <li
+          v-for="(goal, index) in goals"
+          :key="goal"
+          @click="removeGoal(index)"
+        >
+          {{goal}} - {{index}}
+          <input type="text" @click.stop />
+        </li>
       </ul>
+      <!-- <ul>
+        <li v-for="num in 10">{{num}}</li>
+      </ul> -->
+      <!-- <ul>
+        <li v-for="(value, key, index) in {name:'bzy', age: 21}">
+          {{value}} - {{key}} - {{index}}
+        </li>
+      </ul> -->
     </section>
   </body>
 </html>
