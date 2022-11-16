@@ -4,8 +4,12 @@ const app = Vue.createApp({
       tasks: [],
       inputTask: "",
       show: true,
-      showButtonText: "Hide List",
     };
+  },
+  computed: {
+    showButtonText() {
+      return this.show ? "Hide List" : "Show List";
+    },
   },
   methods: {
     addTask() {
@@ -14,7 +18,6 @@ const app = Vue.createApp({
     },
     toggle() {
       this.show = !this.show;
-      this.showButtonText = this.show ? "Hide List" : "Show List";
     },
   },
 });
