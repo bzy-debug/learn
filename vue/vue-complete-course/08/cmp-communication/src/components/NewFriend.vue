@@ -1,10 +1,22 @@
 <template>
-  <form>
-    <div>Name <input type="text" v-model="name" /></div>
-    <div>Phone <input type="text" v-model="phone" /></div>
-    <div>Email <input type="text" v-model="email" /></div>
-    <div>Favorite <input type="checkbox" v-model="isFavorite" /></div>
-    <button @click.prevent="createFriend">Submit</button>
+  <form @submit.prevent="createFriend">
+    <div>
+      <label>Name </label>
+      <input type="text" v-model="name" />
+    </div>
+    <div>
+      <label>Phone</label>
+      <input type="tel" v-model="phone" />
+    </div>
+    <div>
+      <label>Email </label>
+      <input type="email" v-model="email" />
+    </div>
+    <div>
+      <label>Favorite </label>
+      <input type="checkbox" v-model="isFavorite" />
+    </div>
+    <button>Add Contact</button>
   </form>
 </template>
 
@@ -27,7 +39,6 @@ export default {
   methods: {
     createFriend() {
       const newFriend = {
-        id: this.name,
         name: this.name,
         phone: this.phone,
         email: this.email,
