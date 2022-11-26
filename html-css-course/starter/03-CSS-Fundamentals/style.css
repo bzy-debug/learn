@@ -51,19 +51,6 @@ li {
   font-size: 16px;
 } */
 
-.related {
-  list-style: none;
-}
-
-.related-author {
-  font-size: 18px;
-  font-weight: bold;
-}
-
-.main-header {
-  background-color: #f7f7f7;
-}
-
 /* .first-li {
   font-weight: bold;
 } */
@@ -113,10 +100,41 @@ a:active {
 
 /* order matters LVHA */
 
+.related {
+  list-style: none;
+}
+
+.related-author {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.main-header {
+  background-color: #f7f7f7;
+}
+
 #author {
   font-style: italic;
 }
 
 #copyright {
   font-size: 16px;
+}
+
+/* Resolve conflicts */
+
+/* #copyright {
+  color: red;
+} */
+
+.copyright {
+  color: blue;
+}
+
+.text {
+  color: yellow;
+}
+
+footer p {
+  color: green;
 }
