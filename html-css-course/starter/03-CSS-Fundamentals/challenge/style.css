@@ -10,6 +10,7 @@ body {
 
 article {
   border: 5px solid black;
+  position: relative;
 }
 
 h2 {
@@ -43,6 +44,19 @@ p {
   list-style: square;
 } */
 
+article::before {
+  content: "SALE";
+  background-color: red;
+  font-weight: bold;
+  color: whitesmoke;
+  display: inline-block;
+  padding: 5px 15px;
+  position: absolute;
+  top: -18px;
+  left: -42px;
+  letter-spacing: 2px;
+}
+
 .container {
   width: 825px;
   margin: 50px auto;
@@ -68,7 +82,6 @@ p {
 .detail-title {
   text-transform: uppercase;
   font-size: 16px;
-  margin-top: 30px;
   margin-bottom: 10px;
 }
 
@@ -84,6 +97,41 @@ p {
 
 .detail-list li:last-child {
   margin-bottom: 0;
+}
+
+.color-list {
+  list-style: none;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.color-list li {
+  background-color: black;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+
+.color-list li:nth-child(2) {
+  background-color: #2f6ee2;
+}
+
+.color-list li:nth-child(3) {
+  background-color: #ec2f2f;
+}
+
+.color-list li:nth-child(4) {
+  background-color: #f0bf1e;
+}
+
+.color-list li:nth-child(5) {
+  background-color: #90cc20;
+}
+
+.color-list li:nth-child(6) {
+  background-color: #885214;
+  margin-right: 0;
 }
 
 a:link,
