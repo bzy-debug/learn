@@ -106,14 +106,28 @@ a:active {
 
 /* order matters LVHA */
 
+.container {
+  width: 700px;
+  margin: 0 auto;
+}
+
 .main-header {
   background-color: #f7f7f7;
   padding: 20px;
   margin-bottom: 50px;
+  height: 80px;
 }
 
 .post-header {
   margin-bottom: 50px;
+}
+
+.author-img {
+  width: 50px;
+}
+
+.post-img {
+  width: 100%;
 }
 
 .related {
