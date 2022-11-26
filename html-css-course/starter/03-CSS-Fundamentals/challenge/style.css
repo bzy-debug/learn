@@ -17,6 +17,12 @@ button {
   text-transform: uppercase;
 }
 
+button:hover {
+  background-color: white;
+  color: black;
+  cursor: pointer;
+}
+
 /* li {
   list-style: square;
 } */
@@ -38,4 +44,8 @@ button {
 
 a:link {
   color: black;
+}
+
+a:hover {
+  text-decoration: none;
 }
