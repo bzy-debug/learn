@@ -36,10 +36,33 @@ h1 {
   font-style: italic;
 }
 
+h1::first-letter {
+  font-style: normal;
+  margin-right: 5px;
+}
+
 h2 {
   font-size: 40px;
   margin-bottom: 30px;
+  position: relative;
 }
+
+h2::after {
+  content: "TOP";
+  background-color: #ffe70e;
+  color: #444;
+  font-size: 16px;
+  font-weight: bold;
+  display: inline-block;
+  padding: 5px 10px;
+  position: absolute;
+  top: -10px;
+  right: -25px;
+}
+
+/* h2::first-letter {
+  font-size: 80px;
+} */
 
 h3 {
   font-size: 30px;
@@ -58,6 +81,10 @@ p {
   line-height: 1.5;
   margin-bottom: 15px;
 }
+
+/* h3 + p::first-line {
+  color: red;
+} */
 
 ul,
 ol {
@@ -127,7 +154,7 @@ a:active {
 /* order matters LVHA */
 
 .container {
-  width: 700px;
+  width: 800px;
   margin: 0 auto;
 }
 
