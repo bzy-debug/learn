@@ -1,0 +1,41 @@
+body {
+  border: 5px solid black;
+  font-family: sans-serif;
+}
+
+h2 {
+  background-color: #f7f7f7;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+button {
+  background-color: black;
+  border: none;
+  color: white;
+  font-size: 20px;
+  text-transform: uppercase;
+}
+
+/* li {
+  list-style: square;
+} */
+
+.price {
+  font-size: 30px;
+}
+
+.ship {
+  color: #444;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.detail-list {
+  list-style: square;
+}
+
+a:link {
+  color: black;
+}
