@@ -80,11 +80,38 @@ li:last-child {
   color: red;
 } */
 
+/* not work */
+article p:first-child {
+  color: red;
+}
+
 aside {
   background-color: #f7f7f7;
   border-top: 5px solid #1098ad;
   border-bottom: 5px solid #1098ad;
 }
+
+a:link {
+  color: #1098ad;
+  text-decoration: none;
+}
+
+a:visited {
+  color: #1098ad;
+}
+
+a:hover {
+  color: orangered;
+  font-weight: bold;
+  text-decoration: underline orangered;
+}
+
+a:active {
+  background-color: black;
+  font-style: italic;
+}
+
+/* order matters LVHA */
 
 #author {
   font-style: italic;
