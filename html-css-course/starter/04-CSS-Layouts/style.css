@@ -222,9 +222,9 @@ h1::first-letter {
   margin-right: 5px;
 }
 
-h3 + p::first-line {
-  /* color: red; */
-}
+/* h3 + p::first-line {
+  color: red;
+} */
 
 h2 {
   /* background-color: orange; */
@@ -265,3 +265,22 @@ footer p {
 nav p {
   font-size: 18px;
 } */
+
+.author-img {
+  float: left;
+  margin-bottom: 20px;
+}
+
+#author {
+  float: left;
+  margin-left: 20px;
+  margin-top: 10px;
+}
+
+h1 {
+  float: left;
+}
+
+nav {
+  float: right;
+}
