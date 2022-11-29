@@ -1,7 +1,6 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
 body {
@@ -12,7 +11,6 @@ body {
 article {
   border: 5px solid black;
   position: relative;
-  width: 860px;
 }
 
 h2 {
@@ -70,14 +68,15 @@ article::before {
 
 .price {
   font-size: 30px;
+  margin-bottom: 0;
 }
 
 .ship {
-  color: #444;
   text-transform: uppercase;
   font-weight: bold;
   font-size: 12px;
   color: #777;
+  margin-bottom: 0;
 }
 
 .detail-title {
@@ -103,6 +102,7 @@ article::before {
 .color-list {
   list-style: none;
   margin-top: 30px;
+  margin-bottom: 30px;
 }
 
 .color-list li {
@@ -144,33 +144,28 @@ a:active {
   text-decoration: none;
 }
 
-.shoe-img {
-  float: left;
-  width: 250px;
+.content {
+  display: flex;
+  gap: 40px;
 }
 
-.info {
-  float: left;
-  width: 340px;
-  height: 250px;
-  padding: 20px 40px;
+.buy-info {
+  margin-top: 20px;
+  flex: 1;
 }
 
-.price {
-  float: left;
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
 }
 
-.ship {
-  float: right;
-  padding: 10px;
-}
-.info-text {
-  clear: both;
+.color-list {
+  margin-bottom: 0;
 }
 
-.detail {
-  float: left;
-  width: 240px;
-  height: 250px;
-  padding: 20px 0;
+.product-detail {
+  margin-top: 20px;
+  flex: 1;
 }
