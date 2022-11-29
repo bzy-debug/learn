@@ -49,7 +49,10 @@ aside {
   background-color: #f7f7f7;
   border-top: 5px solid #1098ad;
   border-bottom: 5px solid #1098ad;
-  padding: 50px 40px;
+  /* padding-top: 50px;
+  padding-bottom: 50px; */
+  padding: 50px 20px;
+  width: 500px;
 }
 
 /* SMALLER ELEMENTS */
@@ -80,7 +83,6 @@ h4 {
   font-size: 20px;
   text-transform: uppercase;
   text-align: center;
-  margin-bottom: 30px;
 }
 
 p {
@@ -116,6 +118,7 @@ li:last-child {
 #author {
   font-style: italic;
   font-size: 18px;
+  margin-bottom: 0;
 }
 
 #copyright {
@@ -133,7 +136,6 @@ li:last-child {
 
 .related {
   list-style: none;
-  margin: 0;
 }
 
 /* body {
@@ -144,13 +146,13 @@ li:last-child {
   font-weight: bold;
 } */
 
-li:first-child {
+/* li:first-child {
   font-weight: bold;
 }
 
 li:last-child {
   font-style: italic;
-}
+} */
 
 /* li:nth-child(even) {
   color: red;
@@ -266,41 +268,55 @@ nav p {
   font-size: 18px;
 } */
 
-.author-img {
-  float: left;
+/* FLEX */
+.main-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.author-detail {
+  display: flex;
+  align-items: center;
+  gap: 30px;
   margin-bottom: 20px;
 }
 
-#author {
-  float: left;
-  margin-left: 20px;
-  margin-top: 10px;
+.related {
+  margin-left: 0;
 }
 
-h1 {
-  float: left;
+.related-post {
+  display: flex;
+  margin: 0;
+  gap: 20px;
 }
 
-nav {
-  float: right;
+/* .related-detail {
+  flex-basis: 200px;
+} */
+
+.related-link {
+  font-style: normal;
+  font-size: 16px;
+  margin-bottom: 20px;
 }
 
-.clear-fix::after {
-  clear: both;
-  content: "";
-  display: block;
+.related-author {
+  font-style: normal;
+  font-size: 16px;
+}
+
+.main-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 75px
 }
 
 article {
-  float: left;
-  width: 825px;
+  flex: 1;
 }
 
 aside {
-  float: right;
-  width: 300px;
-}
-
-footer {
-  clear: both;
+  flex: 0 0 300px;
 }
