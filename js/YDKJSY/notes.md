@@ -3,7 +3,7 @@
 ## Chapter 1
 
 JS is backwords compatible.
-It's a good choice for code living forever.
+It's a good choice for codes living forever.
 
 Consisteny is the most important property for programming language.
 
@@ -21,7 +21,8 @@ Two kinds of value in JS:
       The choice of `'` or `"` is just a problem of style,
       but bear consisteny in mind.
 
-    - use `` ` `` for interoplation string.
+    - use `` ` `` for interpolation string.
+      only use ` for interpolation.
 
   - boolean
 
@@ -64,7 +65,7 @@ typeof function hello(){};  // "function" not "object"
 
 ### Declaring and Using Variables
 
-there are several syntax forms of creating variables:
+there are several syntax creating variables:
 
 - `var`
 
@@ -123,3 +124,26 @@ There are many syntax forms to make function values.
 One thing bear in mind is that function is first class value in JS.
 
 ### Comparisons
+
+- incoercive comparison
+  `===` tests equality without coercion.
+  So unmatched types will directly results `false`
+  When comes to object, remember object variable is reference
+  there are some inconsistency:
+  ``` javascript
+    NaN === NaN;            // false
+    0 === -0;               // true
+  ```
+  Therefore, don't use `===` for `NaN` and `-0`
+  Use `Number.isNaN` and `Object.is`
+  ``` javascript
+    Number.isNaN(NaN)     // true
+    Object.is(NaN, NaN)   // true
+    Object.is(0, -0)      // false
+  ```
+  
+- coercive comparison
+  `== > < <= >=`
+  other comparison will consider coercion.
+  When types unmatch, first coerce.
+
