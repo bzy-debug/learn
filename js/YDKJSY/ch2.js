@@ -1,10 +1,32 @@
-function hello(myName) {
-  var country = 'China'
-  myName = 'hh'
-
-  console.log(`Hello, ${myName} from ${country}`)
+class Page {
+  constructor(text) {
+    this.text = text
+  }
+  
+  print() {
+    console.log(this.text)
+  }
 }
 
-hello('bzy')
+class Notebook {
+  constructor() {
+    this.pages = []
+  }
+  
+  addPage(text) {
+    let page = new Page(text)
+    this.pages.push(page)
+  }
+  
+  print() {
+    for (let page of this.pages) {
+      page.print()
+    }
+  }
+}
 
-// console.log(country)
+let mathNotes = new Notebook();
+mathNotes.addPage("Arithmetic: + - * / ...");
+mathNotes.addPage("Trigonometry: sin cos tan ...");
+
+mathNotes.print();

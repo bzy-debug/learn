@@ -146,4 +146,6 @@ One thing bear in mind is that function is first class value in JS.
   `== > < <= >=`
   other comparison will consider coercion.
   When types unmatch, first coerce.
+  use alphabetical comparison for strings.
 
+### How We Organize in JS
