@@ -257,5 +257,221 @@ fn asciiToUpper(x: u8) u8 {
 test "unreachable switch" {
   try expect(asciiToUpper('x') == 'X');
   try expect(asciiToUpper('X') == 'X');
-  // try expect(asciiToUpper('1') == '1');
+  // try expect(asciiToUpper('1') == '1'); cause panic
+}
+
+fn increment(num: *u8) void {
+  num.* += 1;
+}
+
+test "pointers" {
+  var x: u8 = 1;
+  increment(&x);
+  try expect(x == 2);
+}
+
+test "naughty pointer" {
+  // var x: u16 = 0;
+  // var y: *u8 = @intToPtr(*u8, x);
+  // _ = y;
+  // null pointer will be detected
+}
+
+test "const pointers" {
+  const x: u8 = 1;
+  var y = &x;
+  // y.* += 1;
+  // y is a const pointer and cannot be assigned
+  _ = y;
+}
+
+test "usize" {
+  try expect(@sizeOf(usize) == @sizeOf(*u8));
+  try expect(@sizeOf(isize) == @sizeOf(*u32));
+}
+
+fn total(values: []const u8) usize {
+  var sum: usize = 0;
+  for(values) |v| {
+    sum += v;
+  }
+  return sum;
+}
+
+test "slices" {
+  const array = [_]u8{1, 2, 3, 4, 5};
+  const slice = array[0..3];
+  try expect(total(slice) == 6);
+}
+
+test "slices 2" {
+  const array = [_]u8{1, 2, 3, 4, 5};
+  const slice = array[0..3];
+  try expect(@TypeOf(slice) == *const [3]u8);
+}
+
+const Direction = enum {north, south, east, west};
+
+// four will be too large for u2
+const Value = enum(u2) {zero, one, two, three};
+
+test "enum oridnal value" {
+  try expect(@enumToInt(Value.zero) == 0);
+  try expect(@enumToInt(Value.one) == 1);
+  try expect(@enumToInt(Value.two) == 2);
+  try expect(@enumToInt(Value.three) == 3);
+}
+
+const Value2 = enum(u32) {
+  hundred = 100,
+  thousand = 1000,
+  million = 1000000,
+  next,
+};
+
+test "set enum ordinal value" {
+  try expect(@enumToInt(Value2.hundred) == 100);
+  try expect(@enumToInt(Value2.thousand) == 1000);
+  try expect(@enumToInt(Value2.million) == 1000000);
+  try expect(@enumToInt(Value2.next) == 1000001);
+}
+
+const Suit = enum {
+  clubs,
+  spades,
+  diamonds,
+  hearts,
+  pub fn isClubs(self: Suit) bool {
+    return self == Suit.clubs;
+  }
+};
+
+test "enum method" {
+  try expect(Suit.isClubs(Suit.clubs));
+}
+
+const Mode = enum {
+  var count: u32 = 0;
+  on,
+  off,
+};
+
+test "hmm" {
+  Mode.count += 1;
+  try expect(Mode.count == 1);
+}
+
+const Vec3 = struct {
+  x: f32, y: f32, z: f32,
+};
+
+test "struct useage" {
+  const my_vector = Vec3{
+    .x = 0,
+    .y = 100,
+    .z = 50,
+  };
+  _ = my_vector;
+}
+
+test "missing struct field" {
+  // const my_vector = Vec3 {
+  //   .x = 0,
+  //   .z = 50,
+  // };
+  // _ = my_vector;
+}
+
+const Vec4 = struct {
+  x: f32, y: f32, z: f32 = 0, w: f32 = undefined,
+};
+
+test "struct defaults" {
+  const my_vector = Vec4 {
+    .x = 1,
+    .y = 2,
+  };
+  _ = my_vector;
+}
+
+const Stuff = struct {
+  x: i32,
+  y: i32,
+  pub fn swap(self: *Stuff) void {
+    // struct pointer automatically deference one level
+    const temp = self.x;
+    self.x = self.y;
+    self.y = temp;
+  }
+};
+
+test "automatic dereference" {
+  var thing = Stuff{.x = 1, .y = 2};
+  thing.swap();
+  try expect(thing.x == 2);
+  try expect(thing.y == 1);
+}
+
+const Result = union {
+  int: i64,
+  float: f64,
+  bool: bool,
+};
+
+test "simple union" {
+  // cannot access to an inactive union field
+  // var result = Result{.int = 1234};
+  // result.float = 12.34;
+}
+
+const tag = enum {a, b, c};
+
+const Tagged = union(tag) {a: u8, b: f32, c: bool};
+
+test "switch on tagged union" {
+  var value = Tagged{ .b = 1.5 };
+  switch (value) {
+    .a => |*byte| byte.* += 1,
+    .b => |*float| float.* *= 2,
+    .c => |*b| b.* = !b.*,
+  }
+  try expect(value.b == 3);
+}
+
+test "integer widening" {
+  const a: u8 = 250;
+  const b: u16 = a;
+  const c: u32 = b;
+  try expect(c == a);
+}
+
+test "@intCast" {
+  const x: u64 = 200;
+  const y = @intCast(u8, x);
+  try expect(@TypeOf(y) == u8);
+  try expect(y == 200);
+}
+
+test "well defined overflow" {
+  var a: u8 = 255;
+  a +%= 1;
+  try expect(a == 0);
+}
+
+test "float widening" {
+  const a: f16 = 0;
+  const b: f32 = a;
+  const c: f128 = b;
+  try expect(c == a);
+}
+
+test "labelled blocks" {
+  const count = blk: {
+    var sum: u32 = 0;
+    var i: u32 = 0;
+    while (i < 10) : (i += 1) sum += i;
+    break :blk sum;
+  };
+  try expect(count == 45);
+  try expect(@TypeOf(count) == u32);
 }
