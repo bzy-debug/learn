@@ -19,6 +19,7 @@ test "if statement" {
     }
 
     try expect(x == 1);
+    try expect(@TypeOf(x) == u16);
 }
 
 test "if statement expression" {
@@ -474,4 +475,107 @@ test "labelled blocks" {
   };
   try expect(count == 45);
   try expect(@TypeOf(count) == u32);
+}
+
+test "nexted continue" {
+  var count: usize = 0;
+  outer: for([_]i32{1, 2, 3, 4, 5, 6, 7, 8}) |_| {
+    for([_]i32{1, 2, 3, 4, 5}) |_| {
+      count += 1;
+      continue :outer;
+    }
+  }
+  try expect(count == 8);
+}
+
+fn rangeHasNumber(begin: usize, end: usize, number: usize) bool {
+  var i = begin;
+  return while (i < end): (i += 1) {
+    if (i == number) break true;
+  } else false;
+}
+
+test "while loop expression" {
+  try expect(rangeHasNumber(0, 10, 3));
+}
+
+test "optional" {
+  var found_index: ?usize = null;
+  const data = [_]i32{1, 2, 3, 4, 5, 6, 7, 8, 9, 12};
+  for(data) |v, i| {
+    if (v == 10) found_index = i;
+  }
+  try expect(found_index == null);
+}
+
+test "const orelse" {
+  const a: ?f32 = null;
+  const b: comptime_float = a orelse 0;
+  try expect(b == 0);
+  try expect(@TypeOf(b) == comptime_float);
+}
+
+test "orelse" {
+    var a: ?f32 = null;
+    var b = a orelse 0;
+    try expect(b == 0);
+    try expect(@TypeOf(b) == f32);
+}
+
+test "orelse unreachable" {
+  const a: ?f32 = 5;
+  const b = a orelse unreachable;
+  const c = a.?;
+  try expect(b == c);
+  try expect(@TypeOf(c) == f32);
+}
+
+test "if optional payload capture" {
+  const a: ?i32 = 5;
+  if (a != null) {
+    const value = a.?;
+    _ = value;
+  }
+
+  var b: ?i32 = 5;
+  if (b) |*value| {
+    value.* += 1;
+  }
+  try expect(b.? == 6);
+}
+
+var numbers_left: u32 = 4;
+
+fn eventuallyNullSequence() ?u32 {
+  if (numbers_left == 0) return null;
+  numbers_left -= 1;
+  return numbers_left;
+}
+
+test "while null capture" {
+  var sum: u32 = 0;
+  while (eventuallyNullSequence()) |value| {
+    sum += value;
+  }
+  try expect(sum == 6);
+}
+
+test "comptime blocks" {
+  var x = comptime fib(10);
+  _ = x;
+
+  var y = comptime blk: {
+    break :blk fib(10);
+  };
+
+  _ = y;
+}
+
+test "comptime_int" {
+  const a = 12;
+  const b = a + 10;
+  const c: u4 = a;
+  _ = c;
+  const d: f32 = b;
+  _ = d;
 }
