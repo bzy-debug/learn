@@ -1,0 +1,5 @@
+(defun divide (x y)
+  (assert (not (zerop y))
+      (y)
+      "The second argument can not be zero. Please change it.")
+  (/ x y))
