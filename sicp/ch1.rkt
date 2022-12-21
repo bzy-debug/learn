@@ -296,3 +296,41 @@
           ((even? i) (* 2 (y i)))
           ((odd? i) (* 4 (y i)))))
   (* (/ h 3) (sum term 0 inc n)))
+
+(define (close-enough? x y)
+  (< (abs (- x y)) 0.001))
+
+(define (search f neg-point pos-point)
+  (let ((mid-point (average neg-point pos-point)))
+    (if (close-enough? neg-point pos-point)
+        mid-point
+        (let ((test-value (f mid-point)))
+          (cond ((positive? test-value)
+                 (search f neg-point mid-point))
+                ((negative? test-value)
+                 (search f mid-point pos-point))
+                (else mid-point))))))
+
+(define (half-interval-method f a b)
+  (let ((a-value (f a))
+        (b-value (f b)))
+    (cond ((and (negative? a-value) (positive? b-value))
+           (search f a b))
+          ((and (negative? b-value) (positive? a-value))
+           (search f b a))
+          (else
+           (error "Values are not of opposite sign" a b)))))
+
+
+(define tolerance 0.00001)
+(define (fixed-point f first-guess)
+  (define (colse-enough? v1 v2)
+    (< (abs (- v1 v2))
+       tolerance))
+  (define (try guess)
+    (let ((next (f guess)))
+      (if (close-enough? guess next)
+          next
+          (try next))))
+  (try first-guess))
+
