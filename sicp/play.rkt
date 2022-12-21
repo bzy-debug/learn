@@ -197,3 +197,102 @@
         (else false)))
 
 
+; (define (sum term a next b)
+; (if (> a b)
+;     0
+;     (+ (term a)
+;        (sum term (next a) next b))))
+
+; (define (sum term a next b)
+;   (define (iter a result)
+;     (if (> a b)
+;         result
+;         (iter (next a) (+ (term a) result))))
+;   (iter a 0))
+
+; (define (product term a next b)
+; (if (> a b)
+;     1
+;     (* (term a)
+;        (product term (next a) next b))))
+
+; (define (product term a next b)
+;   (define (iter a result)
+;     (if (> a b)
+;         result
+;         (iter (next a) (* (term a) result))))
+;     (iter a 1))
+
+;(define (accumulate combiner null-value term a next b)
+;  (if (> a b)
+;     null-value
+;     (combiner (term a)
+;               (accumulate combiner null-value term (next a) next b))))
+
+(define (accumulate combiner null-value term a next b)
+  (define (iter a result)
+    (if (> a b)
+        result
+        (iter (next a) (combiner (term a) result))))
+  (iter a null-value))
+
+(define (filtered-accumulate filter combiner null-value term a next b)
+  (define (iter a result)
+    (if (> a b)
+        result
+        (if (filter a)
+            (iter (next a) (combiner (term a) result))
+            (iter (next a) result))))
+  (iter a null-value))
+
+(define (sum term a next b)
+  (accumulate + 0 term a next b))
+
+(define (product term a next b)
+  (accumulate * 1 term a next b))
+
+(define (fact n)
+  (product identity 1 inc n))
+
+(define (jw-pi n)
+  (define (numerator n)
+    (cond ((even? n) (+ n 2))
+          ((odd? n) (+ n 1))))
+  (define (denominator n)
+    (cond ((even? n) (+ n 1))
+          ((odd? n) (+ n 2))))
+  (define (term n)
+    (/ (numerator n) (denominator n)))
+  (* 4.0 (product term 1 inc n)))
+
+(define (cube x) (* x x x))
+(define (inc n) (+ n 1))
+(define (sum-cubes a b)
+  (sum cube a inc b))
+
+(define (identity x) x)
+(define (sum-integers a b)
+  (sum identity a inc b))
+
+(define (pi-sum a b)
+  (sum (lambda (x) (/ 1.0 (* x (+ x 2))))
+       a
+       (lambda (x) (+ x 4))
+       b))
+
+(define (integral f a b dx)
+  (* (sum f
+          (+ a (/ dx 2.0))
+          (lambda (x) (+ x dx))
+          b)
+     dx))
+
+(define (sim-integral f a b n)
+  (define h (/ (- b a) n))
+  (define (y k) (f (+ a (* k h))))
+  (define (term i)
+    (cond ((= i 0) (y 0))
+          ((= i n) (y n))
+          ((even? i) (* 2 (y i)))
+          ((odd? i) (* 4 (y i)))))
+  (* (/ h 3) (sum term 0 inc n)))
